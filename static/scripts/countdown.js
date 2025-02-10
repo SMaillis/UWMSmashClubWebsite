@@ -4,26 +4,21 @@
             var day = parseInt(element.dataset.daysLeft);
             console.log("Days left:", day);
             var curTime = new Date();
+            const isDST = new Date("June 1, 2025 00:00:00");
+            const notDST = new Date("January 1, 2025 00:00:00");
 
-
-            //get the timezone offset for the user so the time displays correctly regardless of timezone
-            function calcOffset(){
-                //we want to get the day of the week so that we know when daylight savings time is in session
-                //this is essential for users who are not in a region that uses daylight savings because the time
-                //displayed will be incorrect otherwise
-                //daylight savings is 2nd sunday of march to the first sunday in november
-                //when daylight savings is going on the default offset is 300, when it's not it's 360
-
+            //get the timezone offset for the user so the time displays correctly regardless of if its DST or not
+            function calcOffset(time){
                 //get the month, march is 2, november is 10
-                var month = curTime.getMonth();
-                var dayOfMonth = curTime.getDate();
-                var year = curTime.getFullYear();
+                var month = time.getMonth();
+                var dayOfMonth = time.getDate();
+                var year = time.getFullYear();
 
                 //if month is between march and november to see if we are in daylight savings
                 if(month >= 2 && month <= 10){
 
                     if(month === 2) {
-                        const marchDate = new Date("March 1, " + year + " 00:00:00");
+                        var marchDate = new Date("March 1, " + year + " 00:00:00");
                         var daysToSunday;
 
                         //get the 2nd sunday of march
@@ -43,7 +38,7 @@
 
                     }
                     else if(month === 10) {
-                        const novemberDate = new Date("November 1, " + year + " 00:00:00");
+                        var novemberDate = new Date("November 1, " + year + " 00:00:00");
                         //get the 1st sunday of november
                         var tempDate = novemberDate.getDay();
                         daysToSunday = 0;
@@ -66,7 +61,16 @@
                 return 360;
             }
 
-            let offset = (calcOffset() - curTime.getTimezoneOffset()) / 60;
+            //this is used to get the bracket hour
+            var DST = calcOffset(curTime);
+            let offset = (DST - curTime.getTimezoneOffset()) / 60;
+
+            //this value checks if the user is in a non-daylight savings time country, if they are then set to 1
+            var nonDSTCountry = 0;
+            if (isDST.getTimezoneOffset() === notDST.getTimezoneOffset())
+            {
+                nonDSTCountry = 1;
+            }
 
             function getTimeLeft(){
                 //testing stuff
@@ -74,13 +78,25 @@
                 console.log(curTime);
 
                 //get the hours digit
+                var bracketHour = 16 + offset;
+
+                //check if the user's country uses daylight savings time, if they don't then subtract
+                //1 if daylight savings time isn't going on
+
+
+                if(bracketHour >= 24){ bracketHour -= 24; }
+
                 var hour;
-                if(curTime.getHours() <= 16){
-                    hour = 16 - curTime.getHours();
+                if(curTime.getHours() <= bracketHour){
+                    hour = bracketHour - curTime.getHours();
                 }
                 else {
-                    hour = 40 - curTime.getHours();
+                    hour = bracketHour + 24 - curTime.getHours();
                 }
+                if(DST === 360) {
+                    hour -= nonDSTCountry;
+                }
+
 
                 //check to see if minutes is at 30, if it is then subtract 1 from hour
                 if(curTime.getMinutes() > 29) {
@@ -135,7 +151,7 @@
                 }
                 else {
                     span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" +
-                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2) + " " + offset;
+                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2) + "   " + offset;
                 }
             }
 
