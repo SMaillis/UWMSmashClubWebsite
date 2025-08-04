@@ -16,9 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from UWMSmashClubWebsite.views import HomePage
+from UWMSmashClubWebsite.views import HomePage, BracketArchivePage, PowerRankingsPage, PlayerStatsPage, SeedingToolPage, \
+    AboutPage, LoginPage
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomePage.as_view(), name='home'),
+    path('bracket-archive/', BracketArchivePage.as_view(), name='bracket-archive'),
+    path('power-rankings/', PowerRankingsPage.as_view(), name='power-rankings'),
+    path('player-stats/', PlayerStatsPage.as_view(), name='player-stats'),
+    path('seeding-tool/', SeedingToolPage.as_view(), name='seeding-tool'),
+    path('about/', AboutPage.as_view(), name='about'),
+    path('login/', LoginPage.as_view(), name='login'),
 ]

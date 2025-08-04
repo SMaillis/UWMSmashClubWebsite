@@ -9,4 +9,50 @@ class HomePage(View):
     def post(self, request):
         pass
 
-#another test line again lmao
+
+class BracketArchivePage(View):
+    def get(self, request):
+        return render(request, 'bracket-archive.html')
+
+    def post(self, request):
+        pass
+
+
+class PowerRankingsPage(View):
+    def get(self, request):
+        return render(request, 'power-rankings.html')
+
+    def post(self, request):
+        pass
+
+
+class PlayerStatsPage(View):
+    def get(self, request):
+        return render(request, 'player-stats.html')
+
+    def post(self, request):
+        pass
+
+
+class SeedingToolPage(View):
+    def get(self, request):
+        return render(request, 'seeding-tool.html')
+
+    def post(self, request):
+        pass
+
+
+class AboutPage(View):
+    def get(self, request):
+        return render(request, 'about.html')
+
+    def post(self, request):
+        pass
+
+
+class LoginPage(View):
+    def get(self, request):
+        return render(request, 'login.html')
+
+    def post(self, request):
+        pass
