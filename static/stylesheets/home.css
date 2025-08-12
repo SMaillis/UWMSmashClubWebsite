@@ -1,0 +1,51 @@
+body {
+    background: #FFF269;
+    /*#CFA219 is gold ish color*/
+    /* cur is #FFE259 */
+    /* or #FFF269 */
+    margin: 0;
+}
+
+.page-bar {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 20px solid black;
+    background: #AF8209
+}
+
+.user-pages {
+    display: flex;
+    margin-left: 20px;
+}
+
+button {
+    width: 100px;
+    height: 75px;
+    margin: 0 5px;
+    border: 5px solid black;
+    border-radius: 5px;
+    background: #FFF269;
+    font-family: "Merriweather", serif;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* we want the button to darken when we hover over it*/
+button:hover{
+    background: #CFA229
+}
+
+.login-button {
+    margin-right: 20px;
+}
+
+/* this line is the cutoff for all of the page-bar stuff*/
+
+/* you can't use a container for image sizing in css */
+.logo img {
+    display: block;
+    width: 50%;
+    margin: 50px auto;
+    filter: drop-shadow(0 0 1px black); /* this is to apply a shadow to our transparent background image */
+}

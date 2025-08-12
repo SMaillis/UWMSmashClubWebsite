@@ -4,12 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Home | UWM Smash Club Website</title>
-    <link rel="stylesheet" href=/static/home.css>
+    <!-- ?v=1 is required at the end for the style sheet to work for some reason -->
+    <link rel="stylesheet" href=/static/stylesheets/home.css?v=1>
+
+    {# font stuff #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="page-bar">
         <div class="user-pages">
             <!-- the href for each button is the path -->
+            <div class="brick1"></div>
             <button>Home</button>
             <a href="bracket-archive/"><button>Bracket Archive</button></a>
             <a href="power-rankings/"><button>Power Rankings</button></a>
@@ -20,6 +27,9 @@
         <div class="login-button">
             <a href="login/"><button>Login</button></a>
         </div>
+    </div>
+    <div class="logo">
+        <img src="/static/images/UWM_Smash_Club_Logo.png" alt="UWM Smash Club Logo">
     </div>
 </body>
 </html>
