@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>About | UWM Smash Club Website</title>
+    <link rel="stylesheet" href=/static/stylesheets/about.css?v=1>
+
+    {# font stuff #}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <p>About Page Coming Soon</p>
+    <div class="page-bar">
+        <div class="user-pages">
+            <!-- the href for each button is the path -->
+            <a href="/"><button>Home</button></a>
+            <a href="bracket-archive/"><button>Bracket Archive</button></a>
+            <a href="power-rankings/"><button>Power Rankings</button></a>
+            <a href="player-stats/"><button>Player Stats</button></a>
+            <a href="seeding-tool/"><button>Seeding Tool</button></a>
+            <button class="active">About</button>
+        </div>
+        <div class="login-button">
+            <a href="login/"><button>Login</button></a>
+        </div>
+    </div>
+    <div class="about-page">
+        <h1>About Us</h1>
+        <div class="logo">
+            <img src="/static/images/UWM_Smash_Club_Logo.png" alt="UWM Smash Club Logo">
+        </div>
+        <p>This is temporary text</p>
+    </div>
 </body>
 </html>
