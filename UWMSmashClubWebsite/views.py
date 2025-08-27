@@ -42,9 +42,25 @@ class SeedingToolPage(View):
         pass
 
 
-class AboutPage(View):
+class AboutClubPage(View):
     def get(self, request):
-        return render(request, 'about.html')
+        return render(request, 'about-club.html')
+
+    def post(self, request):
+        pass
+
+
+class AboutMePage(View):
+    def get(self, request):
+        return render(request, 'about-me.html')
+
+    def post(self, request):
+        pass
+
+
+class AboutWebsitePage(View):
+    def get(self, request):
+        return render(request, 'about-website.html')
 
     def post(self, request):
         pass
