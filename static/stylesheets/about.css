@@ -53,16 +53,44 @@ button:hover{
 h1 {
     text-align: center;
     margin: 25px 0;
+    color: #2b2839;
 }
 
-.logo img {
+.club img{
     display: block;
-    width: 25%;
+    width: 20%;
     margin: 25px auto;
     filter: drop-shadow(0 0 1px black); /* this is to apply a shadow to our transparent background image */
 }
 
-p {
+.logo img {
+    display: block;
+    width: 30%;
+    margin: 25px auto;
+    filter: drop-shadow(0 0 1px black); /* this is to apply a shadow to our transparent background image */
+}
+
+.self-photo img {
+    display: block;
+    width: 20%;
+    margin: 25px auto;
+    filter: drop-shadow(0 0 1px black); /* this is to apply a shadow to our transparent background image */
+}
+
+.about-text {
     text-indent: 50px;
     margin: 50px 200px;
+    color: #2b2839;
+}
+
+.connect {
+    font-family: "Merriweather", serif;
+    text-align: center;
+    font-size: 11px;
+    position: absolute;
+    bottom: 20px; /* this positions the text 20 pixels from the bottom of the screen because we have position: absolute*/
+    left: 0; /* this and the next 2 lines are used to center align the text with position: absolute */
+    right: 0;
+    margin: 0 auto;
+    color: #2b2839;
 }
