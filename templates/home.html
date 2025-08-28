@@ -30,5 +30,33 @@
     <div class="logo">
         <img src="/static/images/UWM_Smash_Club_Logo.png" alt="UWM Smash Club Logo">
     </div>
+    {# data for the time until the next bracket #}
+    <div>
+        {# this is where our time will display #}
+        <span id="time_left"></span>
+        <script>
+            //this is so that our element appears in the span
+            var span = document.getElementById('time_left');
+            
+            
+            
+            function getTimeLeft(){
+                var curTime = new Date();
+                var day = curTime.getDate();
+                var hour = curTime.getHours();
+                var minute = curTime.getMinutes();
+                var second = curTime.getSeconds();
+                
+                //set the clock to display properly
+                span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" + 
+                    ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2);
+            }
+            //call the function at the end to ensure that it actually runs, we use a set interval so it updates every second
+            setInterval(getTimeLeft, 1000);
+            
+        </script>
+        
+
+    </div>
 </body>
 </html>

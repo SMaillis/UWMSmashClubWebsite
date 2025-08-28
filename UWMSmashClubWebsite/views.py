@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views import View
+from datetime import datetime
 
 # Create your views here.
 class HomePage(View):
     def get(self, request):
+        #get the time and format it to appear properly using strftime
         return render(request, 'home.html')
 
     def post(self, request):
