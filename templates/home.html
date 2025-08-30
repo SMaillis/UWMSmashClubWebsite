@@ -37,9 +37,10 @@
         <script>
             //this is so that our element appears in the span
             const span = document.getElementById('time_left');
-            var day = {{ days_left }};
-            console.log("Days left:", day);
-            var curTime = new Date(2025, 8, 30, 16, 29, 50);
+            var day = 6;
+            {#var day = {{ days_left }};#}
+            {#console.log("Days left:", day);#}
+            var curTime = new Date(2025, 8, 30, 21, 59, 50);
 
             function getTimeLeft(){
                 //testing stuff
@@ -71,8 +72,6 @@
                     minute = 89 - curTime.getMinutes();
                 }
 
-
-
                 //get the seconds digit
                 var second;
                 if (curTime.getSeconds() === 0) {
@@ -98,12 +97,21 @@
                 //if the hour, minute, and seconds all roll over, then subtract 1 from day
                 if(hour === 23 && minute === 59 && second === 59){
                     day -= 1;
+                    if(day === -1) { day = 6 }
                 }
 
-                //set the clock to display properly
-                span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" +
-                    ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2);
+                //set the clock to display properly, if the current time is during the bracket then display that
+                //the bracket is underway instead of the time left
+                if(day === 6 && hour >= 18 && (minute >= 30 || hour > 18))
+                {
+                    span.textContent = "The Bracket is Currently Underway";
+                }
+                else {
+                    span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" +
+                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2);
+                }
             }
+            
             //call the function at the end to ensure that it actually runs, we use a set interval so it updates every second
             setInterval(getTimeLeft, 1000);
         </script>
