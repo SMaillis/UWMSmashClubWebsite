@@ -6,7 +6,8 @@ from datetime import datetime
 class HomePage(View):
     def get(self, request):
         #get the time and format it to appear properly using strftime
-        return render(request, 'home.html')
+        now = datetime(2025, 9, 5, 16, 30, 0).isoformat()
+        return render(request, 'home.html',{"now": now})
 
     def post(self, request):
         pass
