@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.views import View
-from datetime import datetime
+
+from MethodFiles.HomeMethods import GetDaysLeft
 
 # Create your views here.
 class HomePage(View):
     def get(self, request):
         #get the time and format it to appear properly using strftime
-        now = datetime(2025, 9, 5, 16, 30, 0).isoformat()
-        return render(request, 'home.html',{"now": now})
+        daysLeft = GetDaysLeft.getDaysLeft()
+        return render(request, 'home.html',{"days_left": daysLeft})
 
     def post(self, request):
         pass

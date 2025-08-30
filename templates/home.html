@@ -37,13 +37,15 @@
         <script>
             //this is so that our element appears in the span
             const span = document.getElementById('time_left');
-            const bracketString = "{{ now|escapejs }}";
-            const nextBracketTime = new Date(bracketString);
+            var day = {{ days_left }};
+            console.log("Days left:", day);
+            var curTime = new Date(2025, 8, 30, 16, 29, 50);
 
             function getTimeLeft(){
-                var curTime = new Date();
-                var day = curTime.getDate();
-                
+                //testing stuff
+                curTime = new Date(curTime.valueOf() + 1000);
+                console.log(curTime);
+
                 //get the hours digit
                 var hour;
                 if(curTime.getHours() <= 16){
@@ -52,18 +54,25 @@
                 else {
                     hour = 40 - curTime.getHours();
                 }
-                
-                //check to see if minutes is past 30, if it is then subtract 1 from hours
-                if(curTime.getMinutes() > 30) {hour -= 1}
-                
-                //get the minutes digit
-                var minute; 
-                if(curTime.getMinutes() <= 30) {
-                    minute = 30 - curTime.getMinutes();
-                } else {
-                    minute = 90 - curTime.getMinutes();
+
+                //check to see if minutes is at 30, if it is then subtract 1 from hour
+                if(curTime.getMinutes() > 29) {
+                    hour -= 1
+
+                    //if it is 4 pm and after 30 minutes prevent the value from displaying as a negative
+                    if(hour === -1) { hour += 24 }
                 }
-                
+
+                //get the minutes digit
+                var minute;
+                if(curTime.getMinutes() <= 29) {
+                    minute = 29 - curTime.getMinutes();
+                } else {
+                    minute = 89 - curTime.getMinutes();
+                }
+
+
+
                 //get the seconds digit
                 var second;
                 if (curTime.getSeconds() === 0) {
@@ -72,9 +81,23 @@
                     second = 60 - curTime.getSeconds();
                 }
 
-                function calcDays(){
-                    //months apart
-                    
+                //make sure the minute doesn't roll over until seconds is past 00
+                if(second === 0)
+                {
+                    //make sure the clock doesn't display 60 minutes
+                    minute += 1;
+                    if(minute === 60) { minute = 0 }
+
+                    //make sure that the hour doesn't roll over when minutes and seconds are 00
+                    if(minute === 0){
+                        hour += 1;
+                        if (hour === 24) { hour = 0 }
+                    }
+                }
+                
+                //if the hour, minute, and seconds all roll over, then subtract 1 from day
+                if(hour === 23 && minute === 59 && second === 59){
+                    day -= 1;
                 }
 
                 //set the clock to display properly
@@ -83,7 +106,6 @@
             }
             //call the function at the end to ensure that it actually runs, we use a set interval so it updates every second
             setInterval(getTimeLeft, 1000);
-
         </script>
 
 
