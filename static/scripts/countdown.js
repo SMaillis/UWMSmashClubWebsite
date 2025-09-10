@@ -1,8 +1,13 @@
 
+            //this is used so that the time prints on our page in the span tags
             const span = document.getElementById('time_left');
+
+            //this helps us get the days_left that we sent to the html through the django views.py
             const element = document.getElementById('days');
             var day = parseInt(element.dataset.daysLeft);
-            console.log("Days left:", day);
+            console.log("Days left:", day); //necessary for our variable to update
+
+            //the 3 time variables we will need
             var curTime = new Date();
             const isDST = new Date("June 1, 2025 00:00:00");
             const notDST = new Date("January 1, 2025 00:00:00");
@@ -16,10 +21,10 @@
 
                 //if month is between march and november to see if we are in daylight savings
                 if(month >= 2 && month <= 10){
-
+                    //if its march see if we are at or past the 2nd sunday
                     if(month === 2) {
                         var marchDate = new Date("March 1, " + year + " 00:00:00");
-                        var daysToSunday;
+                        var daysToSunday = 0;
 
                         //get the 2nd sunday of march
                         if (marchDate.getDay() !== 0) {
@@ -37,13 +42,13 @@
                         }
 
                     }
+                    //if its november then see if we are before the first sunday
                     else if(month === 10) {
                         var novemberDate = new Date("November 1, " + year + " 00:00:00");
-                        //get the 1st sunday of november
-                        var tempDate = novemberDate.getDay();
+
                         daysToSunday = 0;
-                        if (tempDate !== 0) {
-                            daysToSunday += (7 - tempDate)
+                        if (novemberDate.getDay() !== 0) {
+                            daysToSunday += (7 - novemberDate.getDay())
                         }
                         var dlsEndDate = 1 + daysToSunday;
 
@@ -54,49 +59,41 @@
                             return 360;
                         }
                     }
+                    //if we are in any month from april to october then we are in daylight savings
                     else {
                         return 300;
                     }
                 }
+                //if we are in january, february, or december then it's not daylight savings
                 return 360;
             }
 
-            //this is used to get the bracket hour
+            //this is used to help get the bracket hour regardless of daylight savings
             var DST = calcOffset(curTime);
             let offset = (DST - curTime.getTimezoneOffset()) / 60;
 
             //this value checks if the user is in a non-daylight savings time country, if they are then set to 1
             var nonDSTCountry = 0;
-            if (isDST.getTimezoneOffset() === notDST.getTimezoneOffset())
-            {
-                nonDSTCountry = 1;
-            }
+            if (isDST.getTimezoneOffset() === notDST.getTimezoneOffset()) { nonDSTCountry = 1; }
 
             function getTimeLeft(){
-                //testing stuff
+                //set our curTime to be 1 second ahead of what it normally is because the function is about 1 second
+                //delayed so we want the minutes to tick at the right time
                 curTime = new Date(curTime.valueOf() + 1000);
                 console.log(curTime);
 
                 //get the hours digit
+                //use the timezone offset to ensure that the time displays correctly regardless of timezone
                 var bracketHour = 16 + offset;
-
-                //check if the user's country uses daylight savings time, if they don't then subtract
-                //1 if daylight savings time isn't going on
-
-
                 if(bracketHour >= 24){ bracketHour -= 24; }
 
+                //subtract the current hours from the hour of the bracket so that the right hour is displayed
                 var hour;
-                if(curTime.getHours() <= bracketHour){
-                    hour = bracketHour - curTime.getHours();
-                }
-                else {
-                    hour = bracketHour + 24 - curTime.getHours();
-                }
-                if(DST === 360) {
-                    hour -= nonDSTCountry;
-                }
+                if(curTime.getHours() <= bracketHour){ hour = bracketHour - curTime.getHours(); }
+                else { hour = bracketHour + 24 - curTime.getHours(); }
 
+                //if the user's country doesn't use daylight savings then subtract 1
+                if(DST === 360) { hour -= nonDSTCountry;}
 
                 //check to see if minutes is at 30, if it is then subtract 1 from hour
                 if(curTime.getMinutes() > 29) {
@@ -151,7 +148,7 @@
                 }
                 else {
                     span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" +
-                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2) + "   " + offset;
+                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2);
                 }
             }
 
