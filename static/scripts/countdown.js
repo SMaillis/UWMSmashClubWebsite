@@ -35,10 +35,10 @@
 
                         //now see if our current date is after the start of daylight savings
                         if(dlsStartDate <= dayOfMonth){
-                            return 1;
+                            return 300;
                         }
                         else {
-                            return 0;
+                            return 360;
                         }
 
                     }
@@ -53,21 +53,20 @@
                         var dlsEndDate = 1 + daysToSunday;
 
                         if(dlsEndDate > dayOfMonth){
-                            return 1;
+                            return 300;
                         }
                         else {
-                            return 0;
+                            return 360;
                         }
                     }
                     else {
-                        return 1;
+                        return 300;
                     }
                 }
-                return 0;
+                return 360;
             }
 
-            let offset = calcOffset();
-
+            let offset = (calcOffset() - curTime.getTimezoneOffset()) / 60;
 
             function getTimeLeft(){
                 //testing stuff
