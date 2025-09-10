@@ -5,6 +5,70 @@
             console.log("Days left:", day);
             var curTime = new Date();
 
+
+            //get the timezone offset for the user so the time displays correctly regardless of timezone
+            function calcOffset(){
+                //we want to get the day of the week so that we know when daylight savings time is in session
+                //this is essential for users who are not in a region that uses daylight savings because the time
+                //displayed will be incorrect otherwise
+                //daylight savings is 2nd sunday of march to the first sunday in november
+                //when daylight savings is going on the default offset is 300, when it's not it's 360
+
+                //get the month, march is 2, november is 10
+                var month = curTime.getMonth();
+                var dayOfMonth = curTime.getDate();
+                var year = curTime.getFullYear();
+
+                //if month is between march and november to see if we are in daylight savings
+                if(month >= 2 && month <= 10){
+
+                    if(month === 2) {
+                        const marchDate = new Date("March 1, " + year + " 00:00:00");
+                        var daysToSunday;
+
+                        //get the 2nd sunday of march
+                        if (marchDate.getDay() !== 0) {
+                            daysToSunday = (7 - marchDate.getDay());
+                        }
+                        daysToSunday += 7;
+                        var dlsStartDate = 1 + daysToSunday;
+
+                        //now see if our current date is after the start of daylight savings
+                        if(dlsStartDate <= dayOfMonth){
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+
+                    }
+                    else if(month === 10) {
+                        const novemberDate = new Date("November 1, " + year + " 00:00:00");
+                        //get the 1st sunday of november
+                        var tempDate = novemberDate.getDay();
+                        daysToSunday = 0;
+                        if (tempDate !== 0) {
+                            daysToSunday += (7 - tempDate)
+                        }
+                        var dlsEndDate = 1 + daysToSunday;
+
+                        if(dlsEndDate > dayOfMonth){
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                    else {
+                        return 1;
+                    }
+                }
+                return 0;
+            }
+
+            let offset = calcOffset();
+
+
             function getTimeLeft(){
                 //testing stuff
                 curTime = new Date(curTime.valueOf() + 1000);
@@ -72,7 +136,7 @@
                 }
                 else {
                     span.textContent = ("0" + day).slice(-2) + ":" + ("0" + hour).slice(-2) + ":" +
-                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2);
+                        ("0" + minute).slice(-2) + ":" + ("0" + second).slice(-2) + " " + offset;
                 }
             }
 
