@@ -76,9 +76,11 @@
             var nonDSTCountry = 0;
             if (isDST.getTimezoneOffset() === notDST.getTimezoneOffset()) { nonDSTCountry = 1; }
 
+            //this is to fix the delay of the timer since it has about 2 seconds of delay
+            curTime = new Date(curTime.valueOf() + 2000);
+
             function getTimeLeft(){
-                //set our curTime to be 1 second ahead of what it normally is because the function is about 1 second
-                //delayed so we want the minutes to tick at the right time
+                //make it so we add 1 second to the timer every time the function is called
                 curTime = new Date(curTime.valueOf() + 1000);
                 console.log(curTime);
 
