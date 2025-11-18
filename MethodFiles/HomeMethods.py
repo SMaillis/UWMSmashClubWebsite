@@ -14,8 +14,9 @@ class GetDaysLeft(GetDaysLeftInterface):
         else:
             daysLeft = 4 - weekday
 
-        #if we are at or past 4:30 PM then subtract 1 from our day
-        if now.hour >= 16 and now.minute >= 30:
+        #if we are at or past 5:30 PM then subtract 1 from our day
+        if (now.hour - 6) >= 17 and now.minute >= 30:
             daysLeft -= 1
 
+        print(daysLeft)
         return daysLeft

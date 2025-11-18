@@ -10,7 +10,7 @@
     {# font stuff #}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="page-bar">
@@ -37,7 +37,7 @@
         {# this sends the days left data (format is data-<var name> from our django code to our script #}
         {# to access the name we set for it (the part that follows data-) we convert the name to camel case in the js #}
         <div id="days" data-days-left="{{ days_left }}"></div>
-        
+
         {# this is the link to our script  #}
         <script src="/static/scripts/countdown.js"></script>
 

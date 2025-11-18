@@ -86,7 +86,7 @@
 
                 //get the hours digit
                 //use the timezone offset to ensure that the time displays correctly regardless of timezone
-                var bracketHour = 16 + offset;
+                var bracketHour = 17 + offset;
                 if(bracketHour >= 24){ bracketHour -= 24; }
 
                 //subtract the current hours from the hour of the bracket so that the right hour is displayed
@@ -94,14 +94,14 @@
                 if(curTime.getHours() <= bracketHour){ hour = bracketHour - curTime.getHours(); }
                 else { hour = bracketHour + 24 - curTime.getHours(); }
 
-                //if the user's country doesn't use daylight savings then subtract 1
-                if(DST === 360) { hour -= nonDSTCountry;}
+                //if the user's country doesn't use daylight savings then subtract 1 (don't need)
+                // if(DST === 360) { hour -= nonDSTCountry;}
 
                 //check to see if minutes is at 30, if it is then subtract 1 from hour
                 if(curTime.getMinutes() > 29) {
                     hour -= 1
 
-                    //if it is 4 pm and after 30 minutes prevent the value from displaying as a negative
+                    //if it is 5 pm and after 30 minutes prevent the value from displaying as a negative
                     if(hour === -1) { hour += 24 }
                 }
 
@@ -144,7 +144,7 @@
 
                 //set the clock to display properly, if the current time is during the bracket then display that
                 //the bracket is underway instead of the time left
-                if(day === 6 && hour >= 18 && (minute >= 30 || hour > 18))
+                if((day === 6 || day === -1) && (hour >= 19) && (minute >= 30 || hour > 19))
                 {
                     span.textContent = "The Bracket is Currently Underway";
                 }

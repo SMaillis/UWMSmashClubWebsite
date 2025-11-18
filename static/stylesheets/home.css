@@ -1,17 +1,22 @@
+/* panther gold is #FFBD00, complementary cream is #FEF2DA, black is #000000 */
+/* orange is #F79651 */
+/* Roboto is the only UWM brand font that free for commercial use so use it */
+
 body {
-    background: #FFF269;
+    background: #FEF2DA;
     /*#CFA219 is gold ish color*/
     /* cur is #FFE259 */
     /* or #FFF269 */
     margin: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .page-bar {
     padding: 10px 0;
     display: flex;
     justify-content: space-between;
-    border-bottom: 10px solid black;
-    background: #AF8209
+    border-bottom: 10px solid #000000;
+    background: #FFBD00;
 }
 
 .user-pages {
@@ -25,19 +30,18 @@ button {
     margin: 0 5px;
     border: 4px solid black;
     border-radius: 4px;
-    background: #FFF269;
-    font-family: "Merriweather", serif;
+    background: #FEF2DA;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 /* we want the button to darken when we hover over it*/
 button:hover{
-    background: #CFA229;
+    background: #F79651;
 }
 
 .active {
-    background: #CFA229;
+    background: #F79651;
 }
 
 .login-button {
@@ -51,5 +55,5 @@ button:hover{
     display: block;
     width: 40%;
     margin: 50px auto;
-    filter: drop-shadow(0 0 1px black); /* this is to apply a shadow to our transparent background image */
+    filter: drop-shadow(0 0 1px #000000); /* this is to apply a shadow to our transparent background image */
 }
