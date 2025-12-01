@@ -18,5 +18,4 @@ class GetDaysLeft(GetDaysLeftInterface):
         if (now.hour - 6) >= 17 and now.minute >= 30:
             daysLeft -= 1
 
-        print(daysLeft)
         return daysLeft

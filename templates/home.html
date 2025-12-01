@@ -13,35 +13,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="page-bar">
-        <div class="user-pages">
-            <!-- the href for each button is the path -->
-            <button class="active">Home</button>
-            <a href="bracket-archive"><button>Bracket Archive</button></a>
-            <a href="power-rankings"><button>Power Rankings</button></a>
-            <a href="player-stats"><button>Player Stats</button></a>
-            <a href="seeding-tool"><button>Seeding Tool</button></a>
-            <a href="about-the-club"><button>About</button></a>
-        </div>
-        <div class="login-button">
-            <a href="login"><button>Login</button></a>
-        </div>
-    </div>
-    <div class="logo">
-        <img src="/static/images/UWM_Smash_Club_Logo.png" alt="UWM Smash Club Logo">
-    </div>
-    {# data for the time until the next bracket #}
-    <div>
-        {# this is where our time will display #}
-        <span id="time_left"></span>
-        {# this sends the days left data (format is data-<var name> from our django code to our script #}
-        {# to access the name we set for it (the part that follows data-) we convert the name to camel case in the js #}
-        <div id="days" data-days-left="{{ days_left }}"></div>
-
-        {# this is the link to our script  #}
-        <script src="/static/scripts/countdown.js"></script>
-
-
-    </div>
+    <header>
+        <nav class="page-bar">
+            <div class="user-pages">
+                <!-- the href for each button is the path -->
+                <button class="active">Home</button>
+                <a href="bracket-archive"><button>Bracket Archive</button></a>
+                <a href="power-rankings"><button>Power Rankings</button></a>
+                <a href="player-stats"><button>Player Stats</button></a>
+                <a href="seeding-tool"><button>Seeding Tool</button></a>
+                <a href="about-the-club"><button>About</button></a>
+            </div>
+            <div class="login-button">
+                <a href="login"><button>Login</button></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        
+        <section class="logo">
+            <h1>Welcome to the UWM Smash Club Website</h1>
+            <img src="/static/images/UWM_Smash_Club_Logo.png" alt="UWM Smash Club Logo">
+        </section>
+        {# data for the time until the next bracket #}
+        <section id="countdown">
+            <h2>Time Until Next Tournament</h2>
+            {# this is where our time will display #}
+            <span id="time_left"></span>
+            {# this sends the days left data (format is data-<var name> from our django code to our script #}
+            {# to access the name we set for it (the part that follows data-) we convert the name to camel case in the js #}
+            <div id="days" data-days-left="{{ days_left }}"></div>
+    
+            {# this is the link to our script  #}
+            <script src="/static/scripts/countdown.js"></script>
+            
+        </section>
+    </main>
 </body>
 </html>
